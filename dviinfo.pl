@@ -93,9 +93,12 @@ sub Read_DVI_file {
 
     seek(F, -1, 2);
     while (($c = getc(F)) eq $DVI_Filler) { seek(F, -2, 1); };
-    $cn = ord($c);
-    if ($cn != $Format) {
-	print "DVI format error ($Format vs $cn)!\n\n";
+    $VersionID = ord($c);
+    # Previously we required equality ($VersionID = $Format). However,
+    # it seems ok even when format id (pre) and version id (post_post)
+    # are different. TeX4ht allows $VersionID <= 10, so we follow it
+    if (($VersionID != $Format) && ($VersionID > 10)) {
+	print "DVI format error (format: $Format vs id: $VersionID)!\n\n";
 	close F;  return;
     };
 
@@ -126,7 +129,14 @@ sub Read_DVI_file {
     $Stack      = &Read2_u;
     $Pages      = &Read2_u;
 
-    print "DVI format $Format; " if $List_all;
+    if ($List_all) {
+	print "DVI format $Format; ";
+	if (($Format eq 2) && ($VersionID eq 3)) {
+	    print "id $VersionID (pTeX DVI); ";
+        } elsif ($VersionID > $Format) {
+	    print "id $VersionID; "; # not sure if such a DVI really exists
+        }
+    }
     if ($List_all || $List_pages) {
 	print "$Pages page";
 	print "s" if $Pages != 1;
