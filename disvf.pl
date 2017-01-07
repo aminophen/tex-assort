@@ -87,7 +87,7 @@ sub pret_dvi {
 				($_, $dvi) = unpack("a$cmd a*", $dvi);
 				$k = &get_num($_, 0);
 			}
-			printf " (SETCHAR H %X)\n",$k;
+			printf "      (SETCHAR H %X)\n",$k;
 		} elsif ($cmd == 132) {			# set_rule
 			($a, $b, $dvi) = unpack('a4a4a*', $dvi);
 			$a = &get_num($a, 1);
