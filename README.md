@@ -25,9 +25,21 @@ written by Ichiro Matsuda (Tokyo University of Science)
 - Origin: https://web.archive.org/web/20090519023530/http://itohws03.ee.noda.sut.ac.jp/~matsuda/ttf2pk/disvf.pl
 - Version: unknown (2000/10/23? + patch)
 - License: currently unknown
+- Description: https://web.archive.org/web/20090517083043/http://itohws03.ee.noda.sut.ac.jp/~matsuda/ttf2pk
 
 The script in this repository is patched by Shuzaburo Saito, to convert decimal
 numbers to hexadecimal numbers. (cf. http://psitau.kitunebi.com/mkvf.html )
+
+## others
+
+Here is the list of some utilities which are available as independent repositories:
+
+- replacecjkfonts.pl --- Perl script for producing a PDF without embedded CJK fonts
+    - https://github.com/aminophen/replacecjkfonts
+- bcpdfcrop.bat --- Windows batch file which crops pdf margins (= another pdfcrop)
+    - https://github.com/aminophen/bcpdfcrop
+- dvipdf.bat --- Windows batch file edition of Ghostscript dvipdf (= dvips + gs pdfwrite)
+    - https://github.com/aminophen/dvipdf
 
 
 ----
