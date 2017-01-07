@@ -17,6 +17,15 @@ Note that this program has nothing to do with another program written in C
 by Valentino Kyriakides (Dviinfo revision 1.3 1993/11/23 22:49:30), which is
 included in W32TeX by Akira Kakuto.
 
+## disvf.pl
+
+Perl script which converts VF into VPL (2-byte code is also supported);
+written by Ichiro Matsuda (Tokyo University of Science)
+
+- Origin: https://web.archive.org/web/20090519023530/http://itohws03.ee.noda.sut.ac.jp/~matsuda/ttf2pk/disvf.pl
+- Version: unknown (2000/10/23?)
+- License: currently unknown
+
 
 ----
 
