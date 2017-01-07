@@ -48,7 +48,7 @@ while ($cmd <= 242) {
 		($cc, $_) = unpack('Ca*', $_);
 		$tfm = &get_num($_, 0);
 	}
-	print  "(CHARACTER D $cc\n";
+	printf "(CHARACTER H %X\n",$cc;
 	printf "   (CHARWD R %f)\n", $tfm/(1<<20);
 	print  "   (MAP\n";
 	read(FILE, $dvi, $pl);
@@ -87,7 +87,7 @@ sub pret_dvi {
 				($_, $dvi) = unpack("a$cmd a*", $dvi);
 				$k = &get_num($_, 0);
 			}
-			print  "      (SETCHAR D $k)\n";
+			printf " (SETCHAR H %X)\n",$k;
 		} elsif ($cmd == 132) {			# set_rule
 			($a, $b, $dvi) = unpack('a4a4a*', $dvi);
 			$a = &get_num($a, 1);

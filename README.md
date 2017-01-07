@@ -23,8 +23,11 @@ Perl script which converts VF into VPL (2-byte code is also supported);
 written by Ichiro Matsuda (Tokyo University of Science)
 
 - Origin: https://web.archive.org/web/20090519023530/http://itohws03.ee.noda.sut.ac.jp/~matsuda/ttf2pk/disvf.pl
-- Version: unknown (2000/10/23?)
+- Version: unknown (2000/10/23? + patch)
 - License: currently unknown
+
+The script in this repository is patched by Shuzaburo Saito, to convert decimal
+numbers to hexadecimal numbers. (cf. http://psitau.kitunebi.com/mkvf.html )
 
 
 ----
