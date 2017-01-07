@@ -1,4 +1,4 @@
-#! /usr/local/bin/perl
+#! /usr/bin/env perl
 
 if ($#ARGV != 0) {
 	print "usage: perl disvf.pl virtualfont\n";
