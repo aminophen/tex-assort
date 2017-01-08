@@ -15,9 +15,12 @@ read(FILE, $_, 3);
 ($pre == 247 && $i == 202) || die "Bad VF file!\n";
 read(FILE, $comment, $k);
 print  "(VTITLE $comment)\n";
+print  "(OFMLEVEL H 0)\n"; # ovp2ovf (WEB >=1.12 and C 2.1) doesn't accept char >ff without this
 read(FILE, $_, 8);
 ($cs, $ds) = unpack('NN', $_);
 printf "(DESIGNSIZE R %f)\n", $ds/(1<<20);
+print  "(COMMENT DESIGNSIZE IS IN POINTS)\n";
+print  "(COMMENT OTHER SIZES ARE MULTIPLES OF DESIGNSIZE)\n";
 printf "(CHECKSUM O %o)\n", $cs;
 
 # Font definitions
