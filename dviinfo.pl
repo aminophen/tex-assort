@@ -133,9 +133,9 @@ sub Read_DVI_file {
 	print "DVI format $Format; ";
 	if (($Format eq 2) && ($VersionID eq 3)) {
 	    print "id $VersionID (pTeX DVI); ";
-        } elsif ($VersionID > $Format) {
+	} elsif ($VersionID > $Format) {
 	    print "id $VersionID; "; # not sure if such a DVI really exists
-        }
+	}
     }
     if ($List_all || $List_pages) {
 	print "$Pages page";
