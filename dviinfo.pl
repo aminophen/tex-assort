@@ -36,6 +36,7 @@
 
 $Prog    = "dviinfo";
 $Version = "1.03";
+$Author = "Dag Langmyhr";
 
 $True = 1;
 
@@ -48,7 +49,7 @@ $DVI_Post      = "\370";
 $DVI_Post_post = "\371";
 $DVI_Pre       = "\367";
 
-print "Usage: $prog [-f][-p][-v] file...\n" unless @ARGV;
+print "$Prog $Version by $Author\nUsage: $Prog [-f][-p][-v] file...\n" unless @ARGV;
 
 Param:
 foreach (@ARGV) {
