@@ -222,22 +222,22 @@ sub Read_DVI_file {
 		    print("        +features: ");
 		    $F_tempswa = 0;
 		    if ($F_colored) {
-			printf("Colored=0x%x", $F_colored) if ($F_colored);
+			printf("Colored=0x%x", $F_colored);
 			$F_tempswa = 1;
 		    }
 		    if ($F_extend) {
 			print(", ") if ($F_tempswa);
-			printf("Extend=0x%x", $F_extend) if ($F_extend);
+			printf("Extend=0x%x", $F_extend);
 			$F_tempswa = 1;
 		    }
 		    if ($F_slant) {
 			print(", ") if ($F_tempswa);
-			printf("Slant=0x%x", $F_slant) if ($F_slant);
+			printf("Slant=0x%x", $F_slant);
 			$F_tempswa = 1;
 		    }
 		    if ($F_embolden) {
 			print(", ") if ($F_tempswa);
-			printf("Embolden=0x%x", $F_embolden) if ($F_embolden);
+			printf("Embolden=0x%x", $F_embolden);
 			$F_tempswa = 1;
 		    }
 		    print("\n");
