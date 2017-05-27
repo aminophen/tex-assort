@@ -103,16 +103,14 @@ sub Read_DVI_file {
     seek(F, -1, 2);
     while (($c = getc(F)) eq $DVI_Filler) { seek(F, -2, 1); };
     my $VersionID = ord($c);
-    # Previously we required equality ($VersionID = $Format). However,
+    # Previously we required equality ($VersionID == $Format). However,
     # it seems ok even when format id (pre) and version id (post_post)
     # are different. TeX4ht allows $VersionID <= 10, so we follow it
     if (($VersionID != $Format) && ($VersionID > 10)) {
 	print "DVI format error (format: $Format vs id: $VersionID)!\n\n";
 	close F;  return;
     };
-    if ($Format gt 2) {
-	$IS_XDV = 1;
-    }
+    $IS_XDV = 1 if ($Format > 2);
 
     seek(F, -6, 1);
     if (($c = getc(F)) ne $DVI_Post_post) {
@@ -143,20 +141,14 @@ sub Read_DVI_file {
 
     if ($List_all) {
 	print "DVI format $Format";
-	if ($VersionID != $Format) {
-	    print "; id $VersionID";
-	    if (($Format eq 2) && ($VersionID eq 3)) {
-		print " (pTeX DVI)";
-	    }
-	}
-	if ($Format gt 2) {
-	    print " (XeTeX XDV)";
-	}
+	print "; id $VersionID" if ($VersionID != $Format);
+	print " (pTeX DVI)" if (($Format == 2) && ($VersionID == 3));
+	print " (XeTeX XDV)" if ($Format > 2);
 	print "; ";
     }
     if ($List_all || $List_pages) {
 	print "$Pages page";
-	print "s" if $Pages != 1;
+	print "s" if ($Pages > 1);
     };
 
     $Unit = $Magni*$Numer/(1000*$Denom);
