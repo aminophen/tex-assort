@@ -66,7 +66,7 @@ foreach (@ARGV) {
     /^-v$/ && do {
 	print "This is $Prog (version $Version)\n";  next Param; };
     /^-/ && do {
-	print "$Prog: Unknown option '$_' ignored.\n";  next Param; };
+	print STDERR "$Prog: Unknown option '$_' ignored.\n";  next Param; };
     
     &Read_DVI_file($_);
 }
@@ -82,14 +82,14 @@ sub Read_DVI_file {
 
     print "$_: ";
 
-    open(F, $_) || do { print "Could not open!\n\n"; return };
+    open(F, $_) || do { print STDERR "Could not open!\n\n"; exit 1; };
 
     # First, read info at start of DVI file:
 
     if (($c = getc(F)) ne $DVI_Pre) {
-	printf("Not a DVI file (first byte is 0x%02x, not 0x%02x)!\n\n", 
+	printf STDERR ("Not a DVI file (first byte is 0x%02x, not 0x%02x)!\n\n", 
 	       ord($c), ord($DVI_Pre));
-	close F;  return;
+	close F;  exit 1;
     };
 
     my $Format  = ord(getc(F));
@@ -107,27 +107,27 @@ sub Read_DVI_file {
     # it seems ok even when format id (pre) and version id (post_post)
     # are different. TeX4ht allows $VersionID <= 10, so we follow it
     if (($VersionID != $Format) && ($VersionID > 10)) {
-	print "DVI format error (format: $Format vs id: $VersionID)!\n\n";
-	close F;  return;
+	print STDERR "DVI format error (format: $Format vs id: $VersionID)!\n\n";
+	close F;  exit 1;
     };
     $IS_XDV = 1 if ($Format > 2);
 
     seek(F, -6, 1);
     if (($c = getc(F)) ne $DVI_Post_post) {
 	$cn = ord($c);
-	printf("DVI error: Expected POST_POST command, not 0x%02x!\n\n", $cn);
-	close F;  return;
+	printf STDERR ("DVI error: Expected POST_POST command, not 0x%02x!\n\n", $cn);
+	close F;  exit 1;
     };
 
     my $Last_post = &Read4;
     seek(F, $Last_post, 0) || do {
-	print "Could not locate position $Last_post!\n\n";
-	close F;  return;
+	print STDERR "Could not locate position $Last_post!\n\n";
+	close F;  exit 1;
     };
     if (($c = getc(F)) ne $DVI_Post) {
 	$cn = ord($c);
-	printf("DVI error: Expected POST command, not 0x%02x!\n\n", $cn);
-	close F;  return;
+	printf STDERR ("DVI error: Expected POST command, not 0x%02x!\n\n", $cn);
+	close F;  exit 1;
     };
 
     my $Final_page = &Read4;
@@ -195,8 +195,8 @@ sub Read_DVI_file {
 	    } else { # $c eq $XDV_Font
 		# extended XDV for XeTeX: Native font definition command
 		if (!$IS_XDV) {
-		    printf("Erorr: Command %d used in non-XDV file!\n", ord($XDV_Font));
-		    exit(1);
+		    printf STDERR ("Erorr: Command %d used in non-XDV file!\n", ord($XDV_Font));
+		    close F;  exit 1;
 		}
 		$F_count  = &Read4_u;
 		$F_scale  = &Read4;
@@ -239,8 +239,8 @@ sub Read_DVI_file {
 
 	if ($c ne $DVI_Post_post) {
 	    $cn = ord($c);
-	    printf("DVI error: Expected POST-POST, not 0x%02x!.\n\n", $cn); 
-	    close F;  return;
+	    printf STDERR ("DVI error: Expected POST_POST command, not 0x%02x!\n", $cn);
+	    close F;  exit 1;
 	};
 
 	print "\n";
@@ -251,7 +251,7 @@ sub Read_DVI_file {
 
 
 # Scale_to_pt (Size)
-# ----- 
+# -----
 # Give the Size (which is in dum, the standard DVI size) in pt.
 sub Scale_to_pt {
     return $Unit*$_[0]*72.27/254000;
@@ -260,7 +260,7 @@ sub Scale_to_pt {
 
 # Scale_to_cm (Size)
 # -----------
-# Give the Size (which is in dum, the standard DVI size) in cm. 
+# Give the Size (which is in dum, the standard DVI size) in cm.
 sub Scale_to_cm {
     return &Scale_to_pt($_[0])*2.54/72.27;
 }
@@ -268,7 +268,7 @@ sub Scale_to_cm {
 
 # Scale_to_sp (Size)
 # -----------
-# Give the Size (which is in dum, the standard DVI size) in sp. 
+# Give the Size (which is in dum, the standard DVI size) in sp.
 sub Scale_to_sp {
     return &Scale_to_pt($_[0])*65536;
 }
@@ -285,7 +285,7 @@ sub Read2_u {
 # Read4
 # -----
 # Read a four-byte value.
-# (I assume the value is positive and less than 2^31, so the sign bit 
+# (I assume the value is positive and less than 2^31, so the sign bit
 # won't matter.)
 sub Read4 {
     return ((ord(getc(F))*256+ord(getc(F)))*256+ord(getc(F)))*256+ord(getc(F));
