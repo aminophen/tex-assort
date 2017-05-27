@@ -43,11 +43,12 @@ $True = 1;
 $List_all = $True;
 
 # DVI commands:
-$DVI_Filler    = "\337";
-$DVI_Font      = "\363";
-$DVI_Post      = "\370";
-$DVI_Post_post = "\371";
-$DVI_Pre       = "\367";
+$DVI_Filler    = "\337"; # 223 = 0xdf
+$DVI_Font      = "\363"; # 243 = 0xf3
+$DVI_Post      = "\370"; # 248 = 0xf8
+$DVI_Post_post = "\371"; # 249 = 0xf9
+$DVI_Pre       = "\367"; # 247 = 0xf7
+$XDV_Font      = "\374"; # 252 = 0xfc
 
 print "$Prog $Version by $Author\nUsage: $Prog [-f][-p][-v] file...\n" unless @ARGV;
 
@@ -71,6 +72,7 @@ exit 0;
 sub Read_DVI_file {
     local($_) = @_;
     local($c);
+    $IS_XDV = 0;
 
     print "$_: ";
 
@@ -102,6 +104,9 @@ sub Read_DVI_file {
 	print "DVI format error (format: $Format vs id: $VersionID)!\n\n";
 	close F;  return;
     };
+    if ($Format gt 2) {
+	$IS_XDV = 1;
+    }
 
     seek(F, -6, 1);
     if (($c = getc(F)) ne $DVI_Post_post) {
@@ -131,12 +136,17 @@ sub Read_DVI_file {
     $Pages      = &Read2_u;
 
     if ($List_all) {
-	print "DVI format $Format; ";
-	if (($Format eq 2) && ($VersionID eq 3)) {
-	    print "id $VersionID (pTeX DVI); ";
-	} elsif ($VersionID != $Format) {
-	    print "id $VersionID; "; # not sure if such a DVI really exists
+	print "DVI format $Format";
+	if ($VersionID != $Format) {
+	    print "; id $VersionID";
+	    if (($Format eq 2) && ($VersionID eq 3)) {
+		print " (pTeX DVI)";
+	    }
 	}
+	if ($Format gt 2) {
+	    print " (XeTeX XDV)";
+	}
+	print "; ";
     }
     if ($List_all || $List_pages) {
 	print "$Pages page";
@@ -157,16 +167,73 @@ sub Read_DVI_file {
     print "\n";
 
     if ($List_all || $List_fonts) {
-	while (($c = getc(F)) eq $DVI_Font) {
-	    $F_count  = ord(getc(F));
-	    $F_check  = &Read4_u;
-	    $F_scale  = &Read4;
-	    $F_design = &Read4;
-	    $F_name   = &Read_text2;
-	    printf("  Font %3d: %9s at %6.3f", 
-		   $F_count, $F_name, &Scale_to_pt($F_scale));
-	    printf(" (design size %6.3f, ", &Scale_to_pt($F_design));
-	    print "checksum=$F_check)\n";
+	while (($c = getc(F)) eq $DVI_Font || $c eq $XDV_Font) {
+	    # initialize
+	    $F_count  = 0;
+	    $F_check  = 0;
+	    $F_scale  = 0;
+	    $F_design = 0;
+	    $F_name   = '';
+	    $F_flag   = 0;
+	    $F_index  = 0;
+	    $F_colored = 0;
+	    $F_extend = 0;
+	    $F_slant = 0;
+	    $F_embolden = 0;
+	    if ($c eq $DVI_Font) {
+		# standard DVI: TFM font definition command
+		$F_count  = ord(getc(F));
+		$F_check  = &Read4_u;
+		$F_scale  = &Read4;
+		$F_design = &Read4;
+		$F_name   = &Read_text2;
+		printf("  Font %3d: %9s at %6.3f", 
+		       $F_count, $F_name, &Scale_to_pt($F_scale));
+		printf(" (design size %6.3f, ", &Scale_to_pt($F_design));
+		print "checksum=$F_check)\n";
+	    } else { # $c eq $XDV_Font
+		# extended XDV for XeTeX: Native font definition command
+		if (!$IS_XDV) {
+		    printf("Erorr: Command %d used in non-XDV file!\n", ord($XDV_Font));
+		    exit(1);
+		}
+		$F_count  = &Read4_u;
+		$F_scale  = &Read4;
+		$F_flag   = &Read2_u;
+		$F_name   = &Read_text;
+		$F_index  = &Read4_u;
+		$F_colored = &Read4_u if ($F_flag & 512);
+		$F_extend = &Read4_u if ($F_flag & 4096);
+		$F_slant = &Read4_u if ($F_flag & 8192);
+		$F_embolden = &Read4_u if ($F_flag & 16384);
+		printf("  Native Font %3d: %s at %6.3f", 
+		       $F_count, $F_name, &Scale_to_pt($F_scale));
+		printf(" (flags 0x%04x, face index %d)\n", $F_flag, $F_index);
+		if ($F_flag) {
+		    print("        +features: ");
+		    $F_tempswa = 0;
+		    if ($F_colored) {
+			printf("Colored=0x%x", $F_colored) if ($F_colored);
+			$F_tempswa = 1;
+		    }
+		    if ($F_extend) {
+			print(", ") if ($F_tempswa);
+			printf("Extend=0x%x", $F_extend) if ($F_extend);
+			$F_tempswa = 1;
+		    }
+		    if ($F_slant) {
+			print(", ") if ($F_tempswa);
+			printf("Slant=0x%x", $F_slant) if ($F_slant);
+			$F_tempswa = 1;
+		    }
+		    if ($F_embolden) {
+			print(", ") if ($F_tempswa);
+			printf("Embolden=0x%x", $F_embolden) if ($F_embolden);
+			$F_tempswa = 1;
+		    }
+		    print("\n");
+		}
+	    }
 	};
 
 	if ($c ne $DVI_Post_post) {
