@@ -34,21 +34,26 @@
 #   Font   7:     cmr10 at 10.000 (design size 10.000, checksum=1274110073)
 #   Font   6:      cmr7 at  7.000 (design size  7.000, checksum=3650330706)
 
-$Prog    = "dviinfo";
-$Version = "1.03";
-$Author = "Dag Langmyhr";
+use strict;
 
-$True = 1;
+my $Prog    = "dviinfo";
+my $Version = "1.03";
+my $Author = "Dag Langmyhr";
 
-$List_all = $True;
+my $True = 1;
+my $False = 0;
+
+my $List_all = $True;
+my $List_fonts = $False;
+my $List_pages = $False;
 
 # DVI commands:
-$DVI_Filler    = "\337"; # 223 = 0xdf
-$DVI_Font      = "\363"; # 243 = 0xf3
-$DVI_Post      = "\370"; # 248 = 0xf8
-$DVI_Post_post = "\371"; # 249 = 0xf9
-$DVI_Pre       = "\367"; # 247 = 0xf7
-$XDV_Font      = "\374"; # 252 = 0xfc
+my $DVI_Filler    = "\337"; # 223 = 0xdf
+my $DVI_Font      = "\363"; # 243 = 0xf3
+my $DVI_Post      = "\370"; # 248 = 0xf8
+my $DVI_Post_post = "\371"; # 249 = 0xf9
+my $DVI_Pre       = "\367"; # 247 = 0xf7
+my $XDV_Font      = "\374"; # 252 = 0xfc
 
 print "$Prog $Version by $Author\nUsage: $Prog [-f][-p][-v] file...\n" unless @ARGV;
 
@@ -68,11 +73,12 @@ foreach (@ARGV) {
 
 exit 0;
 
+my $Unit;
 
 sub Read_DVI_file {
     local($_) = @_;
-    local($c);
-    $IS_XDV = 0;
+    my ($c, $cn);
+    my $IS_XDV = 0;
 
     print "$_: ";
 
@@ -86,17 +92,17 @@ sub Read_DVI_file {
 	close F;  return;
     };
 
-    $Format  = ord(getc(F));
-    $Numer   = &Read4;
-    $Denom   = &Read4;
-    $Magni   = &Read4;
-    $Comment = &Read_text;
+    my $Format  = ord(getc(F));
+    my $Numer   = &Read4;
+    my $Denom   = &Read4;
+    my $Magni   = &Read4;
+    my $Comment = &Read_text;
 
     # Then, read information at the end of the DVI file:
 
     seek(F, -1, 2);
     while (($c = getc(F)) eq $DVI_Filler) { seek(F, -2, 1); };
-    $VersionID = ord($c);
+    my $VersionID = ord($c);
     # Previously we required equality ($VersionID = $Format). However,
     # it seems ok even when format id (pre) and version id (post_post)
     # are different. TeX4ht allows $VersionID <= 10, so we follow it
@@ -115,7 +121,7 @@ sub Read_DVI_file {
 	close F;  return;
     };
 
-    $Last_post = &Read4;
+    my $Last_post = &Read4;
     seek(F, $Last_post, 0) || do {
 	print "Could not locate position $Last_post!\n\n";
 	close F;  return;
@@ -126,14 +132,14 @@ sub Read_DVI_file {
 	close F;  return;
     };
 
-    $Final_page = &Read4;
-    $Numer2     = &Read4;
-    $Denom2     = &Read4;
-    $Magni2     = &Read4;
-    $Height     = &Read4;
-    $Width      = &Read4;
-    $Stack      = &Read2_u;
-    $Pages      = &Read2_u;
+    my $Final_page = &Read4;
+    my $Numer2     = &Read4;
+    my $Denom2     = &Read4;
+    my $Magni2     = &Read4;
+    my $Height     = &Read4;
+    my $Width      = &Read4;
+    my $Stack      = &Read2_u;
+    my $Pages      = &Read2_u;
 
     if ($List_all) {
 	print "DVI format $Format";
@@ -167,6 +173,9 @@ sub Read_DVI_file {
     print "\n";
 
     if ($List_all || $List_fonts) {
+	my ($F_count, $F_check, $F_scale, $F_design, $F_name);
+	my ($F_flag, $F_index, $F_colored, $F_extend, $F_slant, $F_embolden);
+	my $F_tempswa;
 	while (($c = getc(F)) eq $DVI_Font || $c eq $XDV_Font) {
 	    # initialize
 	    $F_count  = 0;
@@ -297,7 +306,7 @@ sub Read4 {
 # (I don't know why this works for values >=2^31, and Read4 does not,
 # but as long as it works...)
 sub Read4_u {
-    local(@bytes, @sum);
+    my (@bytes, @sum);
 
     $bytes[0] = ord(getc(F));  $bytes[1] = ord(getc(F));
     $bytes[2] = ord(getc(F));  $bytes[3] = ord(getc(F));
@@ -313,7 +322,8 @@ sub Read4_u {
 # ---------
 # Read a text (a one-byte length and the the text byte).
 sub Read_text {
-    local($Leng, $Res, $_);
+    local($_);
+    my ($Leng, $Res);
 
     $Leng = ord(getc(F));  read(F, $Res, $Leng);
     return $Res;
@@ -324,7 +334,8 @@ sub Read_text {
 # ----------
 # Like 'Read_text', but the length is the sum of two bytes.
 sub Read_text2 {
-    local($Leng, $Res, $_);
+    local($_);
+    my ($Leng, $Res);
 
     $Leng = ord(getc(F)) + ord(getc(F));  read(F, $Res, $Leng);
     return $Res;
