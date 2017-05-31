@@ -1,14 +1,18 @@
-#! /usr/bin/env perl
+#!/usr/bin/env perl
 
-# dviinfo
-# =======
+# dviinfox
+# ========
 # 
-# Written by Dag Langmyhr, Department of Informatics, University of Oslo
-# (dag@ifi.uio.no).
+# This script is a joint effort of
+#   Dag Langmyhr, Department of Informatics, University of Oslo
+#     (dag at ifi.uio.no)
+# and
+#   Hironobu Yamashita, Japanese TeX Development Community
+#     (h.y.acetaminophen at gmail.com)
 #
 # A program to print information about a DVI file.
 #
-# Usage: dviinfo -f -p -v file 1 file2 ...
+# Usage: dviinfox -f -p -v file 1 file2 ...
 # where the flags indicate which information is desired.
 #  -f  Give information about the fonts used.
 #  -p  Give information about the number of pages.
@@ -16,7 +20,7 @@
 # No options will provide all information available.
 #
 # Example:
-# % dviinfo alltt.dvi
+# % dviinfox alltt.dvi
 # alltt.dvi: DVI format 2; 3 pages
 #   Magnification: 1000/1000
 #   Size unit: 1000x25400000/(1000x473628672)dum = 0.054dum = 1.000sp
@@ -36,9 +40,9 @@
 
 use strict;
 
-my $Prog    = "dviinfo";
-my $Version = "1.03";
-my $Author = "Dag Langmyhr";
+my $Prog    = "dviinfox";
+my $Version = "1.04";
+my $Author = "Dag Langmyhr and Hironobu Yamashita";
 
 my $True = 1;
 my $False = 0;
