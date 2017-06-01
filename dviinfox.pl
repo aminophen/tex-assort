@@ -12,11 +12,12 @@
 #
 # A program to print information about a DVI file.
 #
-# Usage: dviinfox -f -p -v file 1 file2 ...
+# Usage: dviinfox [options] file1 file2 ...
 # where the flags indicate which information is desired.
 #  -f  Give information about the fonts used.
 #  -p  Give information about the number of pages.
 #  -v  List the program version number.
+#  -h  Show help message.
 # No options will provide all information available.
 #
 # Example:
@@ -59,7 +60,12 @@ my $DVI_Post_post = "\371"; # 249 = 0xf9
 my $DVI_Pre       = "\367"; # 247 = 0xf7
 my $XDV_Font      = "\374"; # 252 = 0xfc
 
-print "$Prog $Version by $Author\nUsage: $Prog [-f][-p][-v] file...\n" unless @ARGV;
+my $Unit;
+
+if (!@ARGV) {
+    show_usage();
+    print "Try \"$Prog -h\" for more information.\n";
+}
 
 Param:
 foreach (@ARGV) {
@@ -68,7 +74,9 @@ foreach (@ARGV) {
     /^-p$/ && do {
 	$List_pages = $True;  $List_all = $False;  next Param; };
     /^-v$/ && do {
-	print "This is $Prog (version $Version)\n";  next Param; };
+	show_version();  next Param; };
+    /^-h$/ && do {
+	show_help();  next Param; };
     /^-/ && do {
 	print STDERR "$Prog: Unknown option '$_' ignored.\n";  next Param; };
     
@@ -77,7 +85,27 @@ foreach (@ARGV) {
 
 exit 0;
 
-my $Unit;
+# Only sub definitions from here on
+
+sub show_version {
+    print "This is $Prog $Version, by $Author\n";
+}
+
+sub show_usage {
+    show_version();
+    print "Usage: $Prog [-f][-p][-v] file...\n";
+}
+
+sub show_help {
+    show_usage();
+    print "A program to print information about a DVI file.\n";
+    print "Options:\n";
+    print "  -f  Give information about the fonts used.\n";
+    print "  -p  Give information about the number of pages.\n";
+    print "  -v  List the program version number.\n";
+    print "  -h  Show help message.\n";
+    exit 0;
+}
 
 sub Read_DVI_file {
     local($_) = @_;
