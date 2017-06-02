@@ -1,0 +1,36 @@
+\documentclass{article}
+\usepackage{fontspec}
+\begin{document}
+
+\fontspec{texgyretermes}[
+  Extension = {.otf},
+  UprightFont = {*-regular}, ItalicFont = {*-italic},
+  BoldFont = {*-bold}, BoldItalicFont = {*-bolditalic},
+  UprightFeatures={Color = 220022,
+  SmallCapsFeatures = {Color=115511}},
+  ItalicFeatures={Color = 2244FF,
+  SmallCapsFeatures = {Color=112299}},
+  BoldFeatures={Color = FF4422,
+  SmallCapsFeatures = {Color=992211}},
+  BoldItalicFeatures={Color = 888844,
+  SmallCapsFeatures = {Color=444422}},
+]
+
+Upright {\scshape Small Caps}\par
+{\itshape Italic {\scshape Italic Small Caps}}\par
+{\bfseries Bold {\scshape Bold Small Caps}}\par
+{\itshape \bfseries Bold Italic {\scshape Bold Italic Small Caps}}\par
+
+\addfontfeature{FakeBold=3}
+Upright {\scshape Small Caps}\par
+
+\addfontfeature{FakeBold=0.3}
+Upright {\scshape Small Caps}\par
+
+\addfontfeature{FakeSlant=0.3}
+Upright {\scshape Small Caps}\par
+
+\addfontfeature{FakeSlant=1}
+Upright {\scshape Small Caps}\par
+
+\end{document}

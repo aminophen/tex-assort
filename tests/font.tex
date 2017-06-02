@@ -1,0 +1,19 @@
+\documentclass{book}
+\usepackage{lipsum}
+\begin{document}
+\part{Sample part}
+\chapter{Sample chapter}
+\section{Sample section}
+\lipsum[1-3]
+\section{Code test}
+\begin{verbatim}
+  Blah, blah, blah: 3 words
+\end{verbatim}
+\section{Math test}
+\begin{equation}
+\left( \int _0 ^\infty \frac{\sin x}{\sqrt{x}} dx \right) ^2
+= \sum _{k=0} ^\infty \frac{(2k)!}{2^{2k} (k!)^2} \frac{1}{2k+1}
+= \prod _{k=1} ^\infty \frac{4 k^2}{4 k^2 - 1}
+= \frac{\pi}{2}
+\end{equation}
+\end{document}

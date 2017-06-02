@@ -1,0 +1,21 @@
+% これは pTeX の縦組のテスト
+\newdimen\horzsize \newdimen\vertsize
+\horzsize=595.28pt \advance\horzsize -2in
+\vertsize=841.89pt \advance\vertsize -2in
+\font\x=cmr10 at48pt
+\font\y=tmin10 at48pt
+% set to [11]..[31] on purpose
+\count0 11
+\loop\ifnum\count0<31
+\shipout\vbox to\horzsize{\tate
+  \vss\hbox to\vertsize{%
+    % print [1]..[20] locally
+    \advance\count0 -10
+    \hfil\hbox{\yoko\x\the\count0}\hfil
+    \y 縦組のテスト\kansuji\count0
+    \hfil\hbox{\yoko\x\the\count0}\hfil
+  }\vss
+}%
+\advance\count0 1
+\repeat
+\bye

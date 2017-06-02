@@ -1,0 +1,15 @@
+font.xdv: 
+  Native Font  21: c:/w32tex/share/texmf-dist/fonts/opentype/public/lm/lmromanslant10-regular.otf at 10.000 (flags 0x0000, face index 0)
+  Native Font  20: c:/w32tex/share/texmf-dist/fonts/opentype/public/lm/lmmono10-regular.otf at 10.000 (flags 0x0000, face index 0)
+  Native Font  19: c:/w32tex/share/texmf-dist/fonts/opentype/public/lm/lmroman12-bold.otf at 14.400 (flags 0x0000, face index 0)
+  Native Font  17: c:/w32tex/share/texmf-dist/fonts/opentype/public/lm/lmroman12-bold.otf at 24.880 (flags 0x0000, face index 0)
+  Native Font  16: c:/w32tex/share/texmf-dist/fonts/opentype/public/lm/lmroman12-bold.otf at 20.740 (flags 0x0000, face index 0)
+  Native Font  14: c:/w32tex/share/texmf-dist/fonts/opentype/public/lm/lmroman10-regular.otf at 10.000 (flags 0x0000, face index 0)
+  Font  13:    cmsy10 at 10.000 (design size 10.000, checksum=555887770)
+  Font  12:     cmsy7 at  7.000 (design size  7.000, checksum=1327620741)
+  Font  10:    cmmi10 at 10.000 (design size 10.000, checksum=195060286)
+  Font   9:     cmmi7 at  7.000 (design size  7.000, checksum=811964274)
+  Font   7:     cmr10 at 10.000 (design size 10.000, checksum=1274110073)
+  Font   6:      cmr7 at  7.000 (design size  7.000, checksum=3650330706)
+  Font   0:    cmex10 at 10.000 (design size 10.000, checksum=4205933842)
+
