@@ -23,6 +23,7 @@ rm -rf $TMP/$PROJECT/tests
 
 # dirty hack
 perl -pi.bak -0777 -e "s/# tex-assort.*## $PROJECT/# $PROJECT/gs" $TMP/$PROJECT/README.md
+perl -pi.bak -0777 -e "s/### Sample Output/# Sample Output/gs" $TMP/$PROJECT/README.md
 perl -pi.bak -0777 -e "s/### License/# License/gs" $TMP/$PROJECT/README.md
 perl -pi.bak -0777 -e "s/### References/# References/gs" $TMP/$PROJECT/README.md
 perl -pi.bak -0777 -e "s/### Additional Notes/# Additional Notes/gs" $TMP/$PROJECT/README.md
