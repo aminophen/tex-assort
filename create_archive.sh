@@ -17,7 +17,7 @@ fi
 
 echo " * Create $PROJECT.zip ($RELEASEDATE)"
 git archive --format=tar --prefix=$PROJECT/ HEAD | (cd $TMP && tar xf -)
-(cd $TMP/$PROJECT && ls -1) | grep -v -e $PROJECT -e README.md | (cd $TMP/$PROJECT && xargs rm)
+(cd $TMP/$PROJECT && ls -1) | grep -v -e $PROJECT -e README.md -e tests | (cd $TMP/$PROJECT && xargs rm)
 rm $TMP/$PROJECT/.gitignore
 rm -rf $TMP/$PROJECT/tests
 
