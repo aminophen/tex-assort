@@ -1,11 +1,24 @@
-#! /usr/bin/env perl
+#!/usr/bin/env perl
+
+# disvf
+# =====
+# 
+# This script is originally written by
+#   Ichiro Matsuda (Tokyo University of Science)
+# and currently maintained by
+#   Hironobu Yamashita (Japanese TeX Development Community)
+#
+# Perl script which converts VF into VPL (2-byte code is also supported).
+
+use strict;
+my ($pre, $i, $k, $comment, $cs, $ds, $cmd, $ss, $a, $l, $fontname, $pl, $cc, $tfm, $dvi);
 
 if ($#ARGV != 0) {
-	print "usage: perl disvf.pl virtualfont\n";
+	print "Usage: [perl] disvf[.pl] <virtual font>\n";
 	exit;
 }
 
-$file = shift(@ARGV);
+my $file = shift(@ARGV);
 open(FILE, "<$file") || die "Can't open \'$file\'!\n";
 binmode(FILE);
 
@@ -61,9 +74,11 @@ while ($cmd <= 242) {
 	$cmd = unpack('C', getc(FILE));
 }
 
+exit;
+
 sub get_num {
-	local ($buf, $sgn) = @_;
-	local ($num, $i);
+	my ($buf, $sgn) = @_;
+	my ($num, $i);
 	if ($sgn) {
 		($num, $buf) = unpack('ca*', $buf);
 	} else {
@@ -77,9 +92,9 @@ sub get_num {
 }
 
 sub pret_dvi {
-	local ($dvi) = @_;
-	local ($cmd, $k, $a, $b, @stack);
-	local ($w, $x, $y, $z) = (0, 0, 0, 0);
+	my $dvi = @_;
+	my ($cmd, $k, $a, $b, @stack);
+	my ($w, $x, $y, $z) = (0, 0, 0, 0);
 	while ($dvi ne '') {
 		($cmd, $dvi) = unpack('Ca*', $dvi);
 		if ($cmd <= 131) {			# set_char
