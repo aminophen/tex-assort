@@ -106,10 +106,12 @@ is also applied by Hironobu Yamashita.
 
 ### License
 
-Currently unknown. Sorry.
+The script is licensed under MIT License.
 
 ### References
 
+- Current development place by Hironobu Yamashita
+    - https://github.com/aminophen/tex-assort
 - Description by Ichiro Matsuda
     - https://web.archive.org/web/20090517083043/http://itohws03.ee.noda.sut.ac.jp/~matsuda/ttf2pk
 - Original version (2000/10/23?) by Ichiro Matsuda
@@ -131,7 +133,7 @@ Here is the list of some utilities which are available as independent repositori
 
 本リポジトリには、私が個人的に集めた「TeX Live には含まれていない、しかし
 有用な TeX 関連ユーティリティ」を置いておく場所です。
-再配布者である私は何の権利も主張しません。それぞれのプログラムの著者の
-ライセンスに従って利用してください。
+特別に明記していない場合、再配布者である私は何の権利も主張しません。
+それぞれのプログラムの著者のライセンスに従って利用してください。
 
 Hironobu Yamashita
