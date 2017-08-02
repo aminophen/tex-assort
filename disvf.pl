@@ -92,7 +92,7 @@ sub get_num {
 }
 
 sub pret_dvi {
-	my $dvi = @_;
+	my ($dvi) = @_;
 	my ($cmd, $k, $a, $b, @stack);
 	my ($w, $x, $y, $z) = (0, 0, 0, 0);
 	while ($dvi ne '') {
