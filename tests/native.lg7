@@ -3,38 +3,38 @@ native.xdv: DVI format 7 (XeTeX XDV); 1 page
   Size unit: 1000x25400000/(1000x473628672)dum = 0.054dum = 1.000sp
   Page size: 406ptx633pt = 14.304cmx22.247cm
   Stack size: 3
-  Comment: " XeTeX output 2017.06.03:0407"
-  Native Font  36: c:/w32tex/share/texmf-dist/fonts/opentype/public/tex-gyre/texgyretermes-regular.otf at 10.000 (flags 0x6200, face index 0)
+  Comment: " XeTeX output xxxx.xx.xx:xxxx"
+  Native Font  xx: /path/to/texmf-dist/fonts/opentype/public/tex-gyre/texgyretermes-regular.otf at 10.000 (flags 0x6200, face index 0)
         +features: Colored=0x115511ff, Slant=0x10000, Embolden=0x7ae
-  Native Font  35: c:/w32tex/share/texmf-dist/fonts/opentype/public/tex-gyre/texgyretermes-regular.otf at 10.000 (flags 0x6200, face index 0)
+  Native Font  xx: /path/to/texmf-dist/fonts/opentype/public/tex-gyre/texgyretermes-regular.otf at 10.000 (flags 0x6200, face index 0)
         +features: Colored=0x220022ff, Slant=0x10000, Embolden=0x7ae
-  Native Font  34: c:/w32tex/share/texmf-dist/fonts/opentype/public/tex-gyre/texgyretermes-regular.otf at 10.000 (flags 0x6200, face index 0)
+  Native Font  xx: /path/to/texmf-dist/fonts/opentype/public/tex-gyre/texgyretermes-regular.otf at 10.000 (flags 0x6200, face index 0)
         +features: Colored=0x115511ff, Slant=0x4ccd, Embolden=0x7ae
-  Native Font  33: c:/w32tex/share/texmf-dist/fonts/opentype/public/tex-gyre/texgyretermes-regular.otf at 10.000 (flags 0x6200, face index 0)
+  Native Font  xx: /path/to/texmf-dist/fonts/opentype/public/tex-gyre/texgyretermes-regular.otf at 10.000 (flags 0x6200, face index 0)
         +features: Colored=0x220022ff, Slant=0x4ccd, Embolden=0x7ae
-  Native Font  32: c:/w32tex/share/texmf-dist/fonts/opentype/public/tex-gyre/texgyretermes-regular.otf at 10.000 (flags 0x4200, face index 0)
+  Native Font  xx: /path/to/texmf-dist/fonts/opentype/public/tex-gyre/texgyretermes-regular.otf at 10.000 (flags 0x4200, face index 0)
         +features: Colored=0x115511ff, Embolden=0x7ae
-  Native Font  31: c:/w32tex/share/texmf-dist/fonts/opentype/public/tex-gyre/texgyretermes-regular.otf at 10.000 (flags 0x4200, face index 0)
+  Native Font  xx: /path/to/texmf-dist/fonts/opentype/public/tex-gyre/texgyretermes-regular.otf at 10.000 (flags 0x4200, face index 0)
         +features: Colored=0x220022ff, Embolden=0x7ae
-  Native Font  30: c:/w32tex/share/texmf-dist/fonts/opentype/public/tex-gyre/texgyretermes-regular.otf at 10.000 (flags 0x4200, face index 0)
+  Native Font  xx: /path/to/texmf-dist/fonts/opentype/public/tex-gyre/texgyretermes-regular.otf at 10.000 (flags 0x4200, face index 0)
         +features: Colored=0x115511ff, Embolden=0x4ccd
-  Native Font  29: c:/w32tex/share/texmf-dist/fonts/opentype/public/tex-gyre/texgyretermes-regular.otf at 10.000 (flags 0x4200, face index 0)
+  Native Font  xx: /path/to/texmf-dist/fonts/opentype/public/tex-gyre/texgyretermes-regular.otf at 10.000 (flags 0x4200, face index 0)
         +features: Colored=0x220022ff, Embolden=0x4ccd
-  Native Font  28: c:/w32tex/share/texmf-dist/fonts/opentype/public/tex-gyre/texgyretermes-bolditalic.otf at 10.000 (flags 0x0200, face index 0)
+  Native Font  xx: /path/to/texmf-dist/fonts/opentype/public/tex-gyre/texgyretermes-bolditalic.otf at 10.000 (flags 0x0200, face index 0)
         +features: Colored=0x444422ff
-  Native Font  27: c:/w32tex/share/texmf-dist/fonts/opentype/public/tex-gyre/texgyretermes-bolditalic.otf at 10.000 (flags 0x0200, face index 0)
+  Native Font  xx: /path/to/texmf-dist/fonts/opentype/public/tex-gyre/texgyretermes-bolditalic.otf at 10.000 (flags 0x0200, face index 0)
         +features: Colored=0x888844ff
-  Native Font  26: c:/w32tex/share/texmf-dist/fonts/opentype/public/tex-gyre/texgyretermes-bold.otf at 10.000 (flags 0x0200, face index 0)
+  Native Font  xx: /path/to/texmf-dist/fonts/opentype/public/tex-gyre/texgyretermes-bold.otf at 10.000 (flags 0x0200, face index 0)
         +features: Colored=0x992211ff
-  Native Font  25: c:/w32tex/share/texmf-dist/fonts/opentype/public/tex-gyre/texgyretermes-bold.otf at 10.000 (flags 0x0200, face index 0)
+  Native Font  xx: /path/to/texmf-dist/fonts/opentype/public/tex-gyre/texgyretermes-bold.otf at 10.000 (flags 0x0200, face index 0)
         +features: Colored=0xff4422ff
-  Native Font  24: c:/w32tex/share/texmf-dist/fonts/opentype/public/tex-gyre/texgyretermes-italic.otf at 10.000 (flags 0x0200, face index 0)
+  Native Font  xx: /path/to/texmf-dist/fonts/opentype/public/tex-gyre/texgyretermes-italic.otf at 10.000 (flags 0x0200, face index 0)
         +features: Colored=0x112299ff
-  Native Font  23: c:/w32tex/share/texmf-dist/fonts/opentype/public/tex-gyre/texgyretermes-italic.otf at 10.000 (flags 0x0200, face index 0)
+  Native Font  xx: /path/to/texmf-dist/fonts/opentype/public/tex-gyre/texgyretermes-italic.otf at 10.000 (flags 0x0200, face index 0)
         +features: Colored=0x2244ffff
-  Native Font  22: c:/w32tex/share/texmf-dist/fonts/opentype/public/tex-gyre/texgyretermes-regular.otf at 10.000 (flags 0x0200, face index 0)
+  Native Font  xx: /path/to/texmf-dist/fonts/opentype/public/tex-gyre/texgyretermes-regular.otf at 10.000 (flags 0x0200, face index 0)
         +features: Colored=0x115511ff
-  Native Font  21: c:/w32tex/share/texmf-dist/fonts/opentype/public/tex-gyre/texgyretermes-regular.otf at 10.000 (flags 0x0200, face index 0)
+  Native Font  xx: /path/to/texmf-dist/fonts/opentype/public/tex-gyre/texgyretermes-regular.otf at 10.000 (flags 0x0200, face index 0)
         +features: Colored=0x220022ff
-  Native Font  14: c:/w32tex/share/texmf-dist/fonts/opentype/public/lm/lmroman10-regular.otf at 10.000 (flags 0x0000, face index 0)
+  Native Font  xx: /path/to/texmf-dist/fonts/opentype/public/lm/lmroman10-regular.otf at 10.000 (flags 0x0000, face index 0)
 

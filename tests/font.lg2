@@ -3,7 +3,7 @@ font.dvi: DVI format 2; 4 pages
   Size unit: 1000x25400000/(1000x473628672)dum = 0.054dum = 1.000sp
   Page size: 433ptx627pt = 15.253cmx22.049cm
   Stack size: 11
-  Comment: " TeX output 2017.06.03:0419"
+  Comment: " TeX output xxxx.xx.xx:xxxx"
   Font  20:    cmsl10 at 10.000 (design size 10.000, checksum=1890463818)
   Font  19:    cmtt10 at 10.000 (design size 10.000, checksum=3756670072)
   Font  18:    cmbx12 at 14.400 (design size 12.000, checksum=3268824736)
