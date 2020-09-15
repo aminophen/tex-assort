@@ -42,7 +42,7 @@
 use strict;
 
 my $Prog    = "dviinfox";
-my $Version = "1.04";
+my $Version = "1.05";
 my $Author = "Dag Langmyhr and Hironobu Yamashita";
 
 my $True = 1;
@@ -174,8 +174,23 @@ sub Read_DVI_file {
     if ($List_all) {
 	print "DVI format $Format";
 	print "; id $VersionID" if ($VersionID != $Format);
-	print " (pTeX DVI)" if (($Format == 2) && ($VersionID == 3));
-	print " (XeTeX XDV)" if ($Format > 2);
+	if ($Format == 2) {
+	    if ($VersionID == 2) {
+		# Standard DVI
+	    } elsif ($VersionID == 3) {
+		print " (pTeX DVI)";
+	    } else {
+		print " (unknown DVI?)";
+	    }
+	} elsif (($Format >= 4) && ($Format <= 7)) {
+	    if ($VersionID == $Format) {
+		print " (XeTeX XDV)";
+	    } else {
+		print " (unknown DVI?)";
+	    }
+	} else {
+		print " (unknown DVI?)";
+	}
 	print "; ";
     }
     if ($List_all || $List_pages) {
