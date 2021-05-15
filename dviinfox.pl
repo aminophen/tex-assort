@@ -42,7 +42,7 @@
 use strict;
 
 my $Prog    = "dviinfox";
-my $Version = "1.05";
+my $Version = "1.06";
 my $Author = "Dag Langmyhr and Hironobu Yamashita";
 
 my $True = 1;
