@@ -26,9 +26,12 @@ test: font.dvi font.xdv playtate.dvi native.xdv
 	perl -pi.bak -0777 -e 's|" XeTeX output .*"|" XeTeX output xxxx.xx.xx:xxxx"|' native.lg7.tmp
 	perl -pi.bak -0777 -e 's|Native Font \s*\d+: .*texmf.*/fonts/|Native Font  xx: /path/to/texmf-dist/fonts/|g' native.lg7.tmp
 	diff native.lg7.tmp native.lg7
+	perl ../dviinfox.pl fntdef2.dvi >fntdef2.lg2.tmp
+	perl -pi.bak -0777 -e 's|" TeX output .*"|" TeX output xxxx.xx.xx:xxxx"|' fntdef2.lg2.tmp
+	diff fntdef2.lg2.tmp fntdef2.lg2
 	rm -f *.tmp *.bak
 
-files: font.dvi font.xdv playtate.dvi native.xdv
+files: font.dvi font.xdv playtate.dvi native.xdv fntdef2.dvi
 
 playtate.dvi: playtate.tex
 	ptex $(KANJI) $<
